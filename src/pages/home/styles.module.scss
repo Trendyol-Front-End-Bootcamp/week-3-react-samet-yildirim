@@ -1,0 +1,33 @@
+@import "../../styles/_variables";
+.hero{
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &Title{
+        font-size: 100px;
+    }
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background: $dark-grey;
+    padding: 3rem 2rem;
+    position: relative;
+    border-top-left-radius: 140px;
+    border-top-right-radius: 140px;
+}
+
+.sortByWrapper{
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    &SelectBox{
+        padding: .5rem .8rem;
+        cursor: pointer;
+        &:first-child{
+            margin-right: 15px;
+        }
+    }
+}

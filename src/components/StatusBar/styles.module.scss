@@ -1,0 +1,18 @@
+@import '../../styles/_variables';
+.barColorGreen, 
+.barColorRed, 
+.barColorGrey{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.barColorGreen{
+    background: $green;
+}
+.barColorGrey{
+    background: $dark-grey;
+}
+.barColorRed{
+    background: $red;
+}
