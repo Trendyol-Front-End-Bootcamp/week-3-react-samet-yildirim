@@ -1,5 +1,5 @@
 import styles from './styles.module.scss'
-const StatuBar = ({status}) =>{
+const StatusBar = ({status}) =>{
     switch(status){
         case "Alive":
            return <span className={styles.barColorGreen}></span>
@@ -10,4 +10,4 @@ const StatuBar = ({status}) =>{
     }
    
 }
-export default StatuBar;
+export default StatusBar;
