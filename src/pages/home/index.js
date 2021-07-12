@@ -35,7 +35,7 @@ const Home = () => {
   }, [sortBy,page]);
 
   return (
-    <div>
+    <>
       <div className={styles.hero}>
         <h1 className={styles.heroTitle}> Rick and Morty </h1>
       </div>
@@ -79,7 +79,7 @@ const Home = () => {
         ))}
         </InfiniteScroll>
         </main>
-    </div>
+    </>
   );
 };
 export default Home;

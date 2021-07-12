@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Character from "./pages/Character";
 const App = () => {
   return (
-    <div>
+    <div className="appWrapper">
       <Router>
           <Switch>
             <Route path="/:id">
