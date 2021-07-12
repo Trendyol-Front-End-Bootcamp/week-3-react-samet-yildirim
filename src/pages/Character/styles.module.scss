@@ -35,3 +35,19 @@
   }
 }
 
+@media only screen and (max-width:500px){
+  .character{
+    &Title{
+      font-size: 28px;
+    }
+    &Img{
+      width: 220px;
+      height: 220px;
+    }
+    &Episodes{
+      &>h3{
+        font-size: 18px;
+      }
+    }
+  }
+}

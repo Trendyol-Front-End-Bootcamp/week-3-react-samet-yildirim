@@ -62,8 +62,10 @@ const Home = () => {
           <option value="unknown">Unknown</option>
         </select>
       </div>
+        <main className={styles.main} >
+          <h3 className={styles.mainTitle}>Characters <span>{`(${characters.length})`}</span></h3>
         <InfiniteScroll
-            className={styles.main}
+            className={styles.mainScrollArea}
           dataLength={characters.length} //This is important field to render the next data
           next={()=>setPage(page+1)}
           hasMore={hasMore}
@@ -76,6 +78,7 @@ const Home = () => {
           </Link>
         ))}
         </InfiniteScroll>
+        </main>
     </div>
   );
 };

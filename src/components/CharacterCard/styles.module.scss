@@ -3,8 +3,8 @@
     background: $dark-grey;
     color: $white;
     display: flex;
-    width: 600px;
-    height: 220px;
+    // width: 600px;
+    // height: 220px;
     overflow: hidden;
     background: rgb(60, 62, 68);
     border-radius: 0.5rem;
@@ -47,5 +47,30 @@
     }
     &:hover &Right > &RightTitle {
         color: $orange;
+    }
+}
+@media only screen and (max-width:500px){
+    .card{
+        &Right{
+            &Title{
+                font-size: 16px;
+            }
+            &Status{
+                font-size: 12px;
+            }
+            &LightText{
+                font-size: 10px;
+                & + p {
+                    font-size: 12px;
+                }
+            }
+        }
+        &Left{
+            &>img{
+                max-width: 140px;
+                max-height: 140px;
+            }
+        }
+        
     }
 }
