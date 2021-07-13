@@ -16,19 +16,24 @@ const Character = () => {
     episode: [],
   });
   const [episodeInfos, setEpisodeInfos] = useState([]);
+
   useEffect(() => {
+    //Set character
     axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then(({ data }) => setCharacter(data))
       .catch(() => history.push("/404"));
   }, [id]);
+
   useEffect(() => {
-    if (character.episode) {
+    //If there are episodes of the character, get the data of episodes
+    if (!!character.episode.length) {
       axios
         .all([...character.episode.map((episode) => axios.get(episode))])
         .then((res) => setEpisodeInfos(res.map((episode) => episode.data)));
     }
   }, [character]);
+
   return (
     <div className={styles.character}>
       <BackButton />
@@ -42,7 +47,6 @@ const Character = () => {
         <StatusBar status={character.status} /> {character.status} -{" "}
         {character.species}
       </div>
-      {/* <p className={styles.characterLocation}>{character.location.name}</p> */}
       <div className={styles.characterEpisodes}>
         <h3>Episodes:</h3>
         {episodeInfos.map((episode, index) => (

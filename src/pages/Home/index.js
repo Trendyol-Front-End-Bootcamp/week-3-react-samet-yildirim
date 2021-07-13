@@ -16,10 +16,13 @@ const Home = () => {
 
   const handleChange = (e) => {
     setSortBy({ ...sortBy, [e.target.name]: e.target.value });
+    //When query change, we need to clear the characters before we fetch the new ones.
     setCharacters([]);
+    //Set the page 1 so infinite scroll starts again.
     setPage(1);
   };
   useEffect(() => {
+    //Genarates query string for search params
     const query = `?page=${page}${
       sortBy.status ? "&status=" + sortBy.status : ""
     }${sortBy.gender ? "&gender=" + sortBy.gender : ""}`;
@@ -29,6 +32,7 @@ const Home = () => {
       .then(({ data }) => {
         setCharacters([...characters, ...data.results]);
         if (!data.info.next) {
+          //If there is no more item in the api, set hasMore state false for stop infinite scroll
           setHasMore(false);
         }
       });
@@ -68,7 +72,7 @@ const Home = () => {
         </h3>
         <InfiniteScroll
           className={styles.mainScrollArea}
-          dataLength={characters.length} //This is important field to render the next data
+          dataLength={characters.length} 
           next={() => setPage(page + 1)}
           hasMore={hasMore}
           loader={<LoadingSpinner />}
