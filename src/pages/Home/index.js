@@ -12,12 +12,12 @@ const Home = () => {
     gender: "",
   });
   const [characters, setCharacters] = useState([]);
-  const [hasMore,setHasMore]=useState(true)
+  const [hasMore, setHasMore] = useState(true);
 
   const handleChange = (e) => {
     setSortBy({ ...sortBy, [e.target.name]: e.target.value });
-    setCharacters([])
-    setPage(1)
+    setCharacters([]);
+    setPage(1);
   };
   useEffect(() => {
     const query = `?page=${page}${
@@ -27,12 +27,12 @@ const Home = () => {
     axios
       .get(`https://rickandmortyapi.com/api/character${query}`)
       .then(({ data }) => {
-        setCharacters([...characters,...data.results])
-        if(!data.info.next){
-            setHasMore(false)
+        setCharacters([...characters, ...data.results]);
+        if (!data.info.next) {
+          setHasMore(false);
         }
       });
-  }, [sortBy,page]);
+  }, [sortBy, page]);
 
   return (
     <>
@@ -62,23 +62,24 @@ const Home = () => {
           <option value="unknown">Unknown</option>
         </select>
       </div>
-        <main className={styles.main} >
-          <h3 className={styles.mainTitle}>Characters <span>{`(${characters.length})`}</span></h3>
+      <main className={styles.main}>
+        <h3 className={styles.mainTitle}>
+          Characters <span>{`(${characters.length})`}</span>
+        </h3>
         <InfiniteScroll
-            className={styles.mainScrollArea}
+          className={styles.mainScrollArea}
           dataLength={characters.length} //This is important field to render the next data
-          next={()=>setPage(page+1)}
+          next={() => setPage(page + 1)}
           hasMore={hasMore}
-          loader={<LoadingSpinner/>}
-          
+          loader={<LoadingSpinner />}
         >
           {characters.map((character) => (
-          <Link key={character.id} to={`/${character.id}`}>
-            <CharacterCard  {...character} />
-          </Link>
-        ))}
+            <Link key={character.id} to={`/character/${character.id}`}>
+              <CharacterCard {...character} />
+            </Link>
+          ))}
         </InfiniteScroll>
-        </main>
+      </main>
     </>
   );
 };

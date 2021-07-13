@@ -1,5 +1,4 @@
 import styles from "./styles.module.scss";
-import StatusBar from "../StatusBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CharacterCardLeft from "./CharacterCardLeft";
