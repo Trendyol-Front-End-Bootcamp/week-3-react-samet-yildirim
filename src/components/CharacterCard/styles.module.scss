@@ -3,43 +3,12 @@
     background: $dark-grey;
     color: $white;
     display: flex;
-    // width: 600px;
-    // height: 220px;
     overflow: hidden;
     background: rgb(60, 62, 68);
     border-radius: 0.5rem;
     margin: 0.75rem;
     transition: 0.2s ease all;
     
-    &Left{
-       &>img{
-        max-width: 230px;
-        max-height: 220px;
-       }
-    }
-    &Right{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 0.75rem;
-        &Title{
-            font-size: 28px;
-            color: $white;
-            transition: .3s ease color;
-        }
-        &Status{
-            display: flex;
-            align-items: center;
-            &>span {
-                margin-right: 5px;
-            }
-        }
-        &LightText{
-            color: $lighter-grey;
-            font-weight: 500;
-            font-size: 16px;
-        }
-    }
     &:hover{
         transform: translateY(-4px);
         box-shadow: 0 2px 10px $dark-grey;
@@ -47,30 +16,5 @@
     }
     &:hover &Right > &RightTitle {
         color: $orange;
-    }
-}
-@media only screen and (max-width:500px){
-    .card{
-        &Right{
-            &Title{
-                font-size: 16px;
-            }
-            &Status{
-                font-size: 12px;
-            }
-            &LightText{
-                font-size: 10px;
-                & + p {
-                    font-size: 12px;
-                }
-            }
-        }
-        &Left{
-            &>img{
-                max-width: 140px;
-                max-height: 140px;
-            }
-        }
-        
     }
 }

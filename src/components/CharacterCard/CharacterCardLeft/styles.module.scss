@@ -1,0 +1,16 @@
+.cardLeft{
+    &>img{
+     max-width: 230px;
+     max-height: 220px;
+    }
+ }
+@media only screen and (max-width:500px){
+        .cardLeft{
+            &>img{
+                max-width: 140px;
+                max-height: 140px;
+            }
+        }
+        
+    
+}

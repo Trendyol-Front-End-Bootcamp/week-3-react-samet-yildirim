@@ -1,0 +1,40 @@
+@import '../../../styles/_variables';
+.cardRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.75rem;
+    &Title{
+        font-size: 28px;
+        color: $white;
+        transition: .3s ease color;
+    }
+    &Status{
+        display: flex;
+        align-items: center;
+        &>span {
+            margin-right: 5px;
+        }
+    }
+    &LightText{
+        color: $lighter-grey;
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width:500px){
+    .cardRight{
+        &Title{
+            font-size: 16px;
+        }
+        &Status{
+            font-size: 12px;
+        }
+        &LightText{
+            font-size: 10px;
+            & + p {
+                font-size: 12px;
+            }
+        }
+    }
+}
