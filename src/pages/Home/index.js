@@ -5,6 +5,7 @@ import CharacterCard from "../../components/CharacterCard";
 import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import SelectBox from "../../components/SelectBox";
 const Home = () => {
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState({
@@ -44,27 +45,50 @@ const Home = () => {
         <h1 className={styles.heroTitle}> Rick and Morty </h1>
       </div>
       <div className={styles.sortByWrapper}>
-        <select
+        <SelectBox
           className={styles.sortByWrapperSelectBox}
           name="status"
+          selectDescription="Sort by status"
           onChange={handleChange}
-        >
-          <option value="">Sort by status</option>
-          <option value="dead">Dead</option>
-          <option value="alive">Alive</option>
-          <option value="unknown">Unknown</option>
-        </select>
-        <select
+          options={[
+            {
+              value: "dead",
+              text: "Dead",
+            },
+            {
+              value: "alive",
+              text: "Alive",
+            },
+            {
+              value: "unknown",
+              text: "Unknown",
+            },
+          ]}
+        />
+        <SelectBox
           className={styles.sortByWrapperSelectBox}
           name="gender"
+          selectDescription="Sort by gender"
           onChange={handleChange}
-        >
-          <option value="">Sort by gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
-        </select>
+          options={[
+            {
+              value: "male",
+              text: "Male",
+            },
+            {
+              value: "female",
+              text: "Female",
+            },
+            {
+              value: "genderless",
+              text: "Genderless",
+            },
+            {
+              value: "unknown",
+              text: "Unknown",
+            },
+          ]}
+        />
       </div>
       <main className={styles.main}>
         <h3 className={styles.mainTitle}>
@@ -72,7 +96,7 @@ const Home = () => {
         </h3>
         <InfiniteScroll
           className={styles.mainScrollArea}
-          dataLength={characters.length} 
+          dataLength={characters.length}
           next={() => setPage(page + 1)}
           hasMore={hasMore}
           loader={<LoadingSpinner />}
