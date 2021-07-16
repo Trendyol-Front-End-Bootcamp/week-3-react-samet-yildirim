@@ -23,6 +23,7 @@ const Home = () => {
     setPage(1);
   };
   useEffect(() => {
+    const abortController = new AbortController();
     //Genarates query string for search params
     const query = `?page=${page}${
       sortBy.status ? "&status=" + sortBy.status : ""
@@ -37,6 +38,7 @@ const Home = () => {
           setHasMore(false);
         }
       });
+    return () => abortController.abort();
   }, [sortBy, page]);
 
   return (

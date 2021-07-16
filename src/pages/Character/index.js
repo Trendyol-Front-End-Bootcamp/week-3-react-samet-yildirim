@@ -28,7 +28,7 @@ const Character = () => {
       .then(({ data }) => setCharacter(data))
       .catch(() => history.push("/404"))
       .finally(() => {
-        setLoading(false)
+        setLoading(false);
       });
   }, [id]);
 
