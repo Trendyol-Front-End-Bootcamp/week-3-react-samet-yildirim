@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
-const LoadingSpinner = () => {
+const LoadingSpinner = ({position}) => {
   return (
-    <div className={styles.spinner}>
+    <div className={position==="absolute"?styles.spinnerAbsolute:styles.spinner}>
       <div className={styles.bounce1}></div>
       <div className={styles.bounce2}></div>
       <div className={styles.bounce3}></div>

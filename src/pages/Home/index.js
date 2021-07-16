@@ -99,7 +99,7 @@ const Home = () => {
           dataLength={characters.length}
           next={() => setPage(page + 1)}
           hasMore={hasMore}
-          loader={<LoadingSpinner />}
+          loader={<LoadingSpinner position={"absolute"} />}
         >
           {characters.map((character) => (
             <Link key={character.id} to={`/character/${character.id}`}>

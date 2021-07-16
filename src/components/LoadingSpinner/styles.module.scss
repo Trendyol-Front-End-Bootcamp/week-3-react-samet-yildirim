@@ -5,14 +5,11 @@
   box-sizing: border-box;
 }
 
-.spinner {
-  position: absolute;
+.spinner, .spinnerAbsolute {
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
+  
   & div {
     display: inline-block;
     width: 18px;
@@ -27,6 +24,12 @@
   & .bounce2 {
     animation-delay: -0.16s;
   }
+}
+.spinnerAbsolute{
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @keyframes sk-bouncedelay {
