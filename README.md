@@ -2,7 +2,10 @@
 ### About Project
 #### A simple react app that uses react-router-dom and [rickandmortyapi.com](https://rickandmortyapi.com/)
 
-### How to install
+## Live demo
+- [Demo](https://happy-saha-eb51a3.netlify.app/)
+
+## How to install
 - clone project
 - yarn install
 - yarn start
@@ -11,6 +14,7 @@
 - axios
 - react-infinite-scroll
 - node-sass
+
 
 ## Preview
 
