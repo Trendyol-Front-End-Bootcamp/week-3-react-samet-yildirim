@@ -6,6 +6,8 @@ import StatusBar from "../../components/StatusBar";
 import BackButton from "../../components/Buttons/BackButton";
 import { useLoading } from "../../contexts/Loading";
 import Loading from "../../components/Loading";
+import { getEpisodesFromLocalStorage } from "../../utils";
+
 const Character = () => {
   const { loading, setLoading } = useLoading();
   const history = useHistory();
@@ -19,6 +21,7 @@ const Character = () => {
     episode: [],
   });
   const [episodeInfos, setEpisodeInfos] = useState([]);
+  // const [localStorageInfos,setLocalStorageInfos]=useState()
 
   useEffect(() => {
     //Set character
@@ -32,15 +35,27 @@ const Character = () => {
       });
   }, [id]);
 
+  // useEffect(() => {
+  //   //If there are episodes of the character, get the data of episodes
+  //   if (!!character.episode.length) {
+  //     axios
+  //       .all([...character.episode.map((episode) => axios.get(episode))])
+  //       .then((res) => setEpisodeInfos(res.map((episode) => episode.data)));
+  //   }
+  // }, [character]);
+  const getEpisodeIds=(ids)=>{
+    return [...ids.map((episode) => episode.split("/").reverse()[0])]
+  }
   useEffect(() => {
-    //If there are episodes of the character, get the data of episodes
-    if (!!character.episode.length) {
-      axios
-        .all([...character.episode.map((episode) => axios.get(episode))])
-        .then((res) => setEpisodeInfos(res.map((episode) => episode.data)));
-    }
-  }, [character]);
+    // const episodeIds = [
+    //   ...character.episode.map((episode) => episode.split("/").reverse()[0]),
+    // ];
 
+    getEpisodesFromLocalStorage(getEpisodeIds(character.episode)).then((res) => setEpisodeInfos(res));
+  }, [character]);
+  useEffect(() => {
+    console.log("infos", episodeInfos);
+  }, [episodeInfos]);
   return (
     <>
       {loading ? (

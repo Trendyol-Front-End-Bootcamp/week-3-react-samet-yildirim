@@ -1,0 +1,49 @@
+import axios from "axios";
+export const getEpisodesFromLocalStorage = async (episodeIds) => {
+  !localStorage.getItem("episodes") && localStorage.setItem("episodes", "[]");
+
+  const episodesFromStorage = await JSON.parse(
+    localStorage.getItem("episodes")
+  );
+  const epidodeIdsInStorage = episodesFromStorage.map((episode) =>
+    episode.id.toString()
+  );
+
+  let neededData = []; //return data
+  let neededEpisodeIds = []; // Ids that we doesnt have in localStorage
+
+  episodeIds.forEach(
+    (episodeId) =>
+      !epidodeIdsInStorage.includes(episodeId) &&
+      neededEpisodeIds.push(episodeId)
+  );
+
+  if (neededEpisodeIds.length <= 0) {
+    neededData = await episodesFromStorage.filter((episode) =>
+      episodeIds.includes(episode.id.toString())
+    );
+    return neededData;
+  } else {
+    neededData = await axios
+      .all([
+        ...neededEpisodeIds.map((episodeId) =>
+          axios.get(`https://rickandmortyapi.com/api/episode/${episodeId}`)
+        ),
+      ])
+      .then((res) => {
+        localStorage.setItem(
+          "episodes",
+          JSON.stringify([
+            ...episodesFromStorage,
+            ...res.map((episodeInfo) => episodeInfo.data),
+          ])
+        );
+       
+      }).then(async()=>{
+        return await JSON.parse(localStorage.getItem("episodes")).filter((episode) =>
+        episodeIds.includes(episode.id.toString())
+      );
+      })
+    return neededData;
+  }
+};
