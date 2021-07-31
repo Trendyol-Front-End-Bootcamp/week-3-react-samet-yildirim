@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 const StatusBar = ({ status }) => {
   switch (status) {
     case "Alive":
-      return <span className={styles.barColorGreen}></span>;
+      return <span data-testid="status" className={styles.barColorGreen}></span>;
     case "Dead":
-      return <span className={styles.barColorRed}></span>;
+      return <span data-testid="status" className={styles.barColorRed}></span>;
     default:
-      return <span className={styles.barColorGrey}></span>;
+      return <span data-testid="status" className={styles.barColorGrey}></span>;
   }
 };
 StatusBar.propTypes = {

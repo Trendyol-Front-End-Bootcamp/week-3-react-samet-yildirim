@@ -4,9 +4,18 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import CharacterCardLeft from "./CharacterCardLeft";
 import CharacterCardRight from "./CharacterCardRight";
-const CharacterCard = ({ name, image, status, location, species, episode }) => {
+import { Link } from "react-router-dom";
+const CharacterCard = ({
+  id,
+  name,
+  image,
+  status,
+  location,
+  species,
+  episode,
+}) => {
   const [firstSeenIn, setFirstSeenIn] = useState("");
-  const firstSeenInEpisodeId = episode[0].split("/").reverse()[0]; //Gelen url'in sonundaki id'yi alıyoruz
+  const firstSeenInEpisodeId = episode[0]?.split("/").reverse()[0]; //Gelen url'in sonundaki id'yi alıyoruz
   useEffect(() => {
     const abortController = new AbortController();
     axios
@@ -16,16 +25,18 @@ const CharacterCard = ({ name, image, status, location, species, episode }) => {
   }, []);
 
   return (
-    <div className={styles.card}>
-      <CharacterCardLeft name={name} image={image} />
-      <CharacterCardRight
-        name={name}
-        status={status}
-        species={species}
-        lastKnownLocation={location.name}
-        firstSeenIn={firstSeenIn}
-      />
-    </div>
+    <Link to={`/character/${id}`}>
+      <div id="characterCard" className={styles.card}>
+        <CharacterCardLeft name={name} image={image} />
+        <CharacterCardRight
+          name={name}
+          status={status}
+          species={species}
+          lastKnownLocation={location.name}
+          firstSeenIn={firstSeenIn}
+        />
+      </div>
+    </Link>
   );
 };
 CharacterCard.propTypes = {

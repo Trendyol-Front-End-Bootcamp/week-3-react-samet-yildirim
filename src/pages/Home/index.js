@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import axios from "axios";
 import CharacterCard from "../../components/CharacterCard";
-import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import SelectBox from "../../components/SelectBox";
+import { fetchCharacters } from "../../utils";
 const Home = () => {
   const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState({
@@ -24,20 +23,20 @@ const Home = () => {
   };
   useEffect(() => {
     const abortController = new AbortController();
+
     //Genarates query string for search params
     const query = `?page=${page}${
       sortBy.status ? "&status=" + sortBy.status : ""
     }${sortBy.gender ? "&gender=" + sortBy.gender : ""}`;
 
-    axios
-      .get(`https://rickandmortyapi.com/api/character${query}`)
-      .then(({ data }) => {
-        setCharacters([...characters, ...data.results]);
-        if (!data.info.next) {
-          //If there is no more item in the api, set hasMore state false for stop infinite scroll
-          setHasMore(false);
-        }
-      });
+    fetchCharacters(query).then((data) => {
+      setCharacters([...characters, ...data.results]);
+      if (!data.info.next) {
+        //If there is no more item in the api, set hasMore state false for stop infinite scroll
+        setHasMore(false);
+      }
+    });
+
     return () => abortController.abort();
   }, [sortBy, page]);
 
@@ -104,9 +103,7 @@ const Home = () => {
           loader={<LoadingSpinner position={"absolute"} />}
         >
           {characters.map((character) => (
-            <Link key={character.id} to={`/character/${character.id}`}>
-              <CharacterCard {...character} />
-            </Link>
+            <CharacterCard key={character.id} {...character} />
           ))}
         </InfiniteScroll>
       </main>

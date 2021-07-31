@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import axios from "axios";
 import { useParams, useHistory } from "react-router";
 import StatusBar from "../../components/StatusBar";
 import BackButton from "../../components/Buttons/BackButton";
 import { useLoading } from "../../contexts/Loading";
 import Loading from "../../components/Loading";
-import { getEpisodesFromLocalStorage } from "../../utils";
+import {
+  fetchCharacters,
+  getEpisodeIds,
+  getEpisodesFromLocalStorage,
+} from "../../utils";
 
 const Character = () => {
   const { loading, setLoading } = useLoading();
@@ -25,26 +28,22 @@ const Character = () => {
   useEffect(() => {
     //Set character
     setLoading(true);
-    axios
-      .get(`https://rickandmortyapi.com/api/character/${id}`)
-      .then(({ data }) => setCharacter(data))
+
+    fetchCharacters(id)
+      .then((data) => setCharacter(data))
       .catch(() => history.push("/404"))
       .finally(() => {
         setLoading(false);
       });
+
   }, [id]);
 
-  const getEpisodeIds = (ids) => {
-    return [...ids.map((episode) => episode.split("/").reverse()[0])];
-  };
   useEffect(() => {
     getEpisodesFromLocalStorage(getEpisodeIds(character.episode)).then((res) =>
       setEpisodeInfos(res)
     );
   }, [character]);
-  useEffect(() => {
-    console.log("infos", episodeInfos);
-  }, [episodeInfos]);
+  
   return (
     <>
       {loading ? (
