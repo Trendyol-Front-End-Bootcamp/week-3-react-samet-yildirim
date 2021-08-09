@@ -48,25 +48,19 @@ export const getEpisodesFromLocalStorage = async (episodeIds) => {
   }
 };
 export const getEpisodeIds = (ids) => {
-  if (!ids || ids.length < 1){
+  if (!ids || ids.length < 1) {
     return [];
   }
   return [...ids.map((episode) => episode.split("/").reverse()[0])];
 };
 
 export const fetchCharacters = async (query) => {
-  const isQueryANumber=!!parseInt(query);
-  if(!isQueryANumber){
-    throw new Error("Query must be a number");
-  }else{
-    try {
-      const response = await axios.get(
-        `https://rickandmortyapi.com/api/character/${query}`
-      );
-      return response.data;
-    } catch (error) {
-      return error;
-    }
+  try {
+    const response = await axios.get(
+      `https://rickandmortyapi.com/api/character/${query}`
+    );
+    return response.data;
+  } catch (error) {
+    return error;
   }
- 
 };

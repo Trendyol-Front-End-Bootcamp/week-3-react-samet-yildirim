@@ -28,7 +28,6 @@ const Character = () => {
   useEffect(() => {
     //Set character
     setLoading(true);
-
     fetchCharacters(id)
       .then((data) => setCharacter(data))
       .catch(() => history.push("/404"))
